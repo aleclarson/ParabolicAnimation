@@ -1,0 +1,10 @@
+{
+  "name": "ParabolicAnimation",
+  "version": "1.0.0",
+  "main": "js/ParabolicAnimation",
+  "lotus": {
+    "plugins": [
+      "lotus-coffee"
+    ]
+  }
+}
