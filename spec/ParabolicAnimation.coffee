@@ -1,5 +1,6 @@
 
 createMockRaf = require "mock-raf"
+Easing = require "easing"
 
 ParabolicAnimation = require ".."
 
@@ -12,9 +13,10 @@ describe "ParabolicAnimation", ->
     global.requestAnimationFrame = mockRaf.raf
 
     anim = ParabolicAnimation
+      easing: Easing.bezier 0, 0, 1, 1
       startValue: 100
       endValue: 0
-      velocity: 25
+      velocity: 50
       duration: 3200
       captureFrames: yes
 
