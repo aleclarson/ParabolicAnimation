@@ -2,9 +2,17 @@
   "name": "ParabolicAnimation",
   "version": "1.0.0",
   "main": "js/ParabolicAnimation",
-  "lotus": {
-    "plugins": [
-      "lotus-coffee"
-    ]
+  "plugins": [
+    "lotus-coffee"
+  ],
+  "scripts": {
+    "build": "coffee -cb -o js src",
+    "postinstall": "postinstall-build js 'npm run build'"
+  },
+  "dependencies": {
+    "postinstall-build": "0.2.x"
+  },
+  "devDependencies": {
+    "coffee-script": "1.9.x"
   }
 }
