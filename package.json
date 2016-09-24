@@ -10,6 +10,11 @@
     "postinstall": "postinstall-build js 'npm run build'"
   },
   "dependencies": {
+    "Animated": "aleclarson/Animated#2.0.2",
+    "LazyVar": "aleclarson/LazyVar#2.1.0",
+    "Type": "aleclarson/Type#2.0.0",
+    "easing": "aleclarson/easing#2.0.0",
+    "gaussian-elimination": "aleclarson/gaussian-elimination#1.0.0",
     "postinstall-build": "0.2.x"
   },
   "devDependencies": {
