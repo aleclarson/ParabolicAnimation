@@ -11,14 +11,14 @@ type = Type "ParabolicAnimation"
 type.inherits Animation
 
 type.defineOptions
-  endValue: Number.isRequired
+  toValue: Number.isRequired
   velocity: Number.isRequired
   duration: Number.isRequired
   easing: Function
 
 type.defineFrozenValues (options) ->
 
-  endValue: options.endValue
+  toValue: options.toValue
 
   startVelocity: options.velocity
 
@@ -74,18 +74,18 @@ type.defineMethods
       [Math.pow(dt, 2), dt, 1]
       [0, 1, 0]
     ], [
-      @startValue
-      @endValue
+      @fromValue
+      @toValue
       @startVelocity
     ]
 
 type.overrideMethods
 
-  __didStart: (config) ->
-    @time = @startTime = Date.now()
-    @value = @startValue = config.startValue
+  __onAnimationStart: ->
+    @time = @startTime
+    @value = @fromValue
     @_coeff = @_computeCoefficients()
-    @_requestAnimationFrame()
+    @__super arguments
 
   __computeValue: ->
     @_velocity.reset()
@@ -93,10 +93,21 @@ type.overrideMethods
     @progress = @time / @duration
     return @value = @_valueAtTime @_easedTiming @time
 
-  __didUpdate: (value) ->
+  __onAnimationUpdate: (value) ->
     @finish() if @time is @duration
 
   __captureFrame: ->
     { @value, @velocity, @time, @progress }
+
+  __getNativeConfig: ->
+    frames = []
+    frameDuration = 1000 / 60
+    frameTime = 0
+    while frameTime < @duration
+      frames.push @_valueAtTime @_easedTiming frameTime
+      frameTime += frameDuration
+    if frameTime - @duration < 0.001
+      frames.push @_valueAtTime @duration
+    return {type: "frames", frames, @toValue}
 
 module.exports = type.build()
