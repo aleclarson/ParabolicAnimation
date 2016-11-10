@@ -103,11 +103,13 @@ type.overrideMethods
     frames = []
     frameDuration = 1000 / 60
     frameTime = 0
+    distance = @toValue - @fromValue
     while frameTime < @duration
-      frames.push @_valueAtTime @_easedTiming frameTime
+      value = @_valueAtTime @_easedTiming frameTime
+      frames.push (value - @fromValue) / distance
       frameTime += frameDuration
     if frameTime - @duration < 0.001
-      frames.push @_valueAtTime @duration
+      frames.push 1
     return {type: "frames", frames, @toValue}
 
 module.exports = type.build()
