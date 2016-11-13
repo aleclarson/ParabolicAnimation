@@ -94,7 +94,8 @@ type.overrideMethods
     return @value = @_valueAtTime @_easedTiming @time
 
   __onAnimationUpdate: (value) ->
-    @finish() if @time is @duration
+    if @time is @duration
+      @stop yes
 
   __captureFrame: ->
     { @value, @velocity, @time, @progress }
