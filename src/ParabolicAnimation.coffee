@@ -11,12 +11,12 @@ type = Type "ParabolicAnimation"
 type.inherits Animation
 
 type.defineArgs ->
-  required: {toValue: yes, velocity: yes, duration: yes}
+  required: yes
   types:
     toValue: Number
     velocity: Number
     duration: Number
-    easing: Function
+    easing: Function.Maybe
 
 type.defineFrozenValues (options) ->
 
